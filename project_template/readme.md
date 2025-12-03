@@ -5,11 +5,12 @@
 
 ```sh
 uv sync
-make fmt
+make format
 make lint
 make test
 make bench
 make run
+make clean
 ```
 
 - debug main.py with vs code
