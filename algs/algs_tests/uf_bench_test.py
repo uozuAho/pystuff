@@ -1,5 +1,5 @@
 import pytest
-from algs.uf import QuickFindUF, QuickUnionUF
+from algs.union_find import QuickFindUF, QuickUnionUF
 
 
 # todo: best, worst, random case
