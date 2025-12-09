@@ -1,4 +1,7 @@
-""" 2d grid of characters """
+""" 2d grid of characters.
+    Origin = (0, 0), bottom left.
+    +y is up
+"""
 
 type Grid = list[list[str]]
 type PosXy = tuple[int, int]
@@ -15,7 +18,11 @@ def togrid(input: str) -> Grid:
     for line in input.splitlines():
         if not line.strip(): continue
         grid.append([c for c in line.strip()])
-    return grid
+    # reverse for +y
+    return list(reversed(grid))
+
+def charAt(grid: Grid, pos: PosXy):
+    return grid[pos[1]][pos[0]]
 
 def height(grid: Grid):
     return len(grid)
