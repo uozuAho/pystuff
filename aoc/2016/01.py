@@ -7,6 +7,7 @@ def go(input:str, start=None) -> g.PosXy:
     num = 0
     pos = start
     facing = g.NORTH
+    visited = set([pos])
     for x in input.split(','):
         if 'L' in x:
             num = int(x.replace('L', ''))
@@ -16,7 +17,16 @@ def go(input:str, start=None) -> g.PosXy:
             facing = g.turnright(facing)
         else:
             raise KeyError("asdfasdf")
-        pos = g.add(pos, facing, num)
+        revisited=False
+        for _ in range(num):
+            pos = g.add(pos, facing, 1)
+            if pos in visited:
+                revisited = True
+                break
+            else:
+                visited.add(pos)
+        if revisited:
+            break
     return pos
 
 
