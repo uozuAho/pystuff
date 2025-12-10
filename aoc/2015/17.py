@@ -8,6 +8,7 @@ samp = """20
 5
 5"""
 
+
 # 10m
 def solve(input: str):
     nums = [int(x) for x in input.splitlines()]
@@ -23,13 +24,14 @@ def solve(input: str):
                     minlen = len(c)
     return sum(1 if len(x) == minlen else 0 for x in combos)
 
+
 if __name__ == "__main__":
     year, day = 2015, 17
     real = get_data(year=year, day=day)
 
-    if 'print' in sys.argv:
+    if "print" in sys.argv:
         print(solve(samp))
-    elif 'submit' in sys.argv:
+    elif "submit" in sys.argv:
         submit(solve(real), year=year, day=day)
     else:
         solve(samp)

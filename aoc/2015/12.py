@@ -3,6 +3,7 @@ import sys
 from aocd import get_data, submit
 import json
 
+
 def getnums(itr, ignore=None):
     if isinstance(itr, int):
         # print(itr)
@@ -15,6 +16,7 @@ def getnums(itr, ignore=None):
     elif isinstance(itr, Iterable) and not isinstance(itr, str):
         for x in itr:
             yield from getnums(x, ignore)
+
 
 # pattern matching example
 def getnums_p(itr, ignore=None):
@@ -31,17 +33,20 @@ def getnums_p(itr, ignore=None):
         case _:
             raise TypeError("oh no")
 
+
 def solve(input: str):
     j = json.loads(input)
     nums = list(getnums(j))
     # print(nums)
     return sum(nums)
 
+
 def solve2(input: str):
     j = json.loads(input)
     nums = list(getnums(j, ignore="red"))
     # print(nums)
     return sum(nums)
+
 
 if __name__ == "__main__":
     assert solve("[1,2,3]") == 6
@@ -61,9 +66,9 @@ if __name__ == "__main__":
     real = get_data(year=year, day=day)
     samp = real
 
-    if 'print' in sys.argv:
+    if "print" in sys.argv:
         print(solve(samp))
-    elif 'submit' in sys.argv:
+    elif "submit" in sys.argv:
         submit(solve2(real), year=year, day=day)
     else:
         solve(samp)

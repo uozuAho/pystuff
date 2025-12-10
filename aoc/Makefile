@@ -18,6 +18,8 @@ i:
 t:
 	uv run pytest --benchmark-skip
 
+test: t
+
 # benchmarks
 b:
 	uv run pytest --benchmark-only
@@ -25,3 +27,11 @@ b:
 # benchmarks, use pypy
 bb:
 	uv run --python pypy-3.11 pytest --benchmark-only
+
+format:
+	uv run ruff format
+
+lint:
+	uv run ruff check
+
+precommit: format lint test

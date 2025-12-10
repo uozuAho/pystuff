@@ -14,6 +14,7 @@ London to Belfast = 518
 Dublin to Belfast = 141
 """
 
+
 def solve(input: str):
     v = set([])
     e = defaultdict(dict)
@@ -29,7 +30,7 @@ def solve(input: str):
     for path in itertools.permutations(v):
         dist = 0
         for i in range(1, len(path)):
-            x0 = path[i-1]
+            x0 = path[i - 1]
             x1 = path[i]
             dist += e[x0][x1]
         if dist > maxdist:
@@ -37,10 +38,10 @@ def solve(input: str):
     return maxdist
 
 
-if 'print' in sys.argv:
+if "print" in sys.argv:
     print(solve(samp))
 
-elif 'submit' in sys.argv:
+elif "submit" in sys.argv:
     submit(solve(real), year=year, day=day)
 
 else:

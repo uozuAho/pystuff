@@ -19,17 +19,19 @@ samp = """
 ......#...
 """
 
+
 @dataclass
 class Map:
     h: int
     w: int
     obs: set[tuple[int, int]]
 
-    def is_in_bounds(self, x , y):
+    def is_in_bounds(self, x, y):
         return 0 <= x < self.w and 0 <= y < self.h
 
     def is_obs(self, x, y):
         return (x, y) in self.obs
+
 
 @dataclass
 class Guard:
@@ -48,6 +50,7 @@ class Guard:
             self.x = x
             self.y = y
 
+
 def parse(input: str) -> tuple[Map, Guard]:
     w = 0
     obs = set([])
@@ -58,31 +61,44 @@ def parse(input: str) -> tuple[Map, Guard]:
             continue
         w = len(line)
         for i, c in enumerate(line):
-            if c == '#':
+            if c == "#":
                 obs.add((i, row))
-            if c == '^':
+            if c == "^":
                 guard = Guard(i, row, c)
-        row +=1
+        row += 1
     m = Map(row, w, obs)
     if not guard:
         raise KeyError("no guard")
     return m, guard
 
+
 def infront(guard: Guard) -> tuple[int, int]:
     match guard.c:
-        case '^': return guard.x, guard.y - 1
-        case '>': return guard.x + 1, guard.y
-        case 'v': return guard.x, guard.y + 1
-        case '<': return guard.x - 1, guard.y
-        case _: raise KeyError("bad guard char")
+        case "^":
+            return guard.x, guard.y - 1
+        case ">":
+            return guard.x + 1, guard.y
+        case "v":
+            return guard.x, guard.y + 1
+        case "<":
+            return guard.x - 1, guard.y
+        case _:
+            raise KeyError("bad guard char")
+
 
 def turn_right(c: str) -> str:
     match c:
-        case '^': return '>'
-        case '>': return 'v'
-        case 'v': return '<'
-        case '<': return '^'
-        case _: raise KeyError("bad guard char")
+        case "^":
+            return ">"
+        case ">":
+            return "v"
+        case "v":
+            return "<"
+        case "<":
+            return "^"
+        case _:
+            raise KeyError("bad guard char")
+
 
 def solve1(input: str):
     map, guard = parse(input)
@@ -91,6 +107,7 @@ def solve1(input: str):
         visited.add((guard.x, guard.y))
         guard.go_next(map)
     return len(visited)
+
 
 def has_loop(map, guard: Guard):
     visited = set([])
@@ -102,6 +119,7 @@ def has_loop(map, guard: Guard):
         visited.add(gstate)
         tmp_guard.go_next(map)
     return False
+
 
 def solve2(input: str):
     map, guard = parse(input)

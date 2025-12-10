@@ -9,4 +9,5 @@ dependencies = [
     "numpy>=2.2.6",
     "pytest-benchmark>=5.2.0",
     "pytest>=8.4.2",
+    "ruff>=0.14.8",
 ]
