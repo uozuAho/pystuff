@@ -34,4 +34,10 @@ format:
 lint:
 	uv run ruff check
 
+lintfix:
+	uv run ruff check --fix
+
 precommit: format lint test
+
+clean:
+	rm -rf __pycache__ .benchmarks .pytest_cache .ruff_cache .venv

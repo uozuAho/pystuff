@@ -1,4 +1,4 @@
-from aocd import get_data, submit
+from aocd import get_data
 
 year, day = 2015, 1
 
