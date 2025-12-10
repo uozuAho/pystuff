@@ -5,6 +5,8 @@ Origin = (0, 0), bottom left.
 +y is up
 """
 
+import typing as t
+
 type Grid = list[list]
 type PosXy = tuple[int, int]
 type Dir = complex
@@ -14,6 +16,24 @@ RIGHT = EAST = 1 + 0j
 DOWN = SOUTH = 0 - 1j
 LEFT = WEST = -1 + 0j
 ORIGIN = (0, 0)
+
+
+def parsegrid(input: str, to_row: t.Callable[[str], list]):
+    grid = []
+    for line in input.splitlines():
+        if not line.strip():
+            continue
+        grid.append(to_row(line))
+    # reverse for +y
+    return list(reversed(grid))
+
+
+def parse_chargrid(input: str):
+    return parsegrid(input, lambda line: [c for c in line.strip()])
+
+
+def parse_intgrid(input: str):
+    return parsegrid(input, lambda line: [int(c) for c in line.split()])
 
 
 def el(grid: Grid, pos: PosXy):

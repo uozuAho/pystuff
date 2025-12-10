@@ -17,18 +17,8 @@ def isvalid(trpl):
     return s[0] + s[1] > s[2]
 
 
-def togrid(input: str):
-    rows = []
-    for line in input.splitlines():
-        if not line.strip():
-            continue
-        rows.append([int(x) for x in line.split()])
-    return rows
-
-
 p.pipe(
-    samp,
-    togrid,
+    g.parsegrid(samp, lambda line: [int(n) for n in line.split()]),
     g.cols,
     p.flatten,
     lambda x: itertools.batched(x, 3),
