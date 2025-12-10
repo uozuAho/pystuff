@@ -36,7 +36,6 @@ def solve1(input: str):
         ppl[x][y] = sign * int(num)
     # print(ppl.keys())
     max_total = -99999999999999
-    max_p = None
     for p in itertools.permutations(ppl.keys()):
         total = 0
         p_ext = [p[-1]] + list(p) + [p[0]]
@@ -45,7 +44,6 @@ def solve1(input: str):
             total += ppl[p_ext[i]][p_ext[i + 1]]
         if total > max_total:
             max_total = total
-            max_p = p
     return max_total
 
 
@@ -67,7 +65,6 @@ def solve2(input: str):
     ppl["wozza"] = {x: 0 for x in ppl.keys()}
     # print(ppl.keys())
     max_total = -99999999999999
-    max_p = None
     for p in itertools.permutations(ppl.keys()):
         total = 0
         p_ext = [p[-1]] + list(p) + [p[0]]
@@ -76,7 +73,6 @@ def solve2(input: str):
             total += ppl[p_ext[i]][p_ext[i + 1]]
         if total > max_total:
             max_total = total
-            max_p = p
     return max_total
 
 

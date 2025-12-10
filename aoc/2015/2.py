@@ -10,9 +10,9 @@ raw = get_data(year=year, day=day)
 def solve1(str: str):
     a = 0
     for line in str.splitlines():
-        l, w, h = [int(x) for x in line.split("x")]
-        a += 2 * l * w + 2 * w * h + 2 * h * l
-        a += min(l * w, w * h, h * l)
+        ll, w, h = [int(x) for x in line.split("x")]
+        a += 2 * ll * w + 2 * w * h + 2 * h * ll
+        a += min(ll * w, w * h, h * ll)
     return a
 
 

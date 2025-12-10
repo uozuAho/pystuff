@@ -31,14 +31,14 @@ def solve2(input: str):
             for k in range(101):
                 if i + j + k > 100:
                     continue
-                l = 100 - i - j - k
+                ll = 100 - i - j - k
                 cals = [x[4] for x in ing.values()]
-                calsum = sum(x * y for x, y in zip([i, j, k, l], cals))
+                calsum = sum(x * y for x, y in zip([i, j, k, ll], cals))
                 if calsum != 500:
                     continue
                 myings = [x[:4] for x in ing.values()]
                 scores = [
-                    max(0, i * x + j * y + k * z + l * zz)
+                    max(0, i * x + j * y + k * z + ll * zz)
                     for (x, y, z, zz) in zip(*myings)
                 ]
                 score = 1

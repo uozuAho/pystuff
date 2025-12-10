@@ -1,5 +1,4 @@
-from utils.basic import *
-from utils.pipe import *
+import utils.pipe as p
 import utils.grid as g
 import itertools
 
@@ -27,11 +26,11 @@ def togrid(input: str):
     return rows
 
 
-pipe(
+p.pipe(
     samp,
     togrid,
     g.cols,
-    flatten,
+    p.flatten,
     lambda x: itertools.batched(x, 3),
     # pprint,
     lambda x: map(isvalid, x),

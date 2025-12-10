@@ -44,7 +44,6 @@ def solve2(input: str, time_s=2503):
             raise NameError("no!")
         else:
             n, spd, dur, rest_dur = m.groups()
-            t_full = int(dur) + int(rest_dur)
             stats[n] = [int(x) for x in (spd, dur, rest_dur)]
     scores = Counter()
     travelled = defaultdict(int)
