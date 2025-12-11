@@ -1,5 +1,5 @@
 from typing import Counter
-from pipe import where, map, tee, Pipe
+from pipe import where, map, tee
 from utils.pipefriends import notempty, ignore
 
 

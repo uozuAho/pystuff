@@ -19,12 +19,6 @@
   have a minute to debug before you can resubmit
     - 4 wrong submissions = 5 minute wait
 - be able to instantly go to REPL and back
-    - if using vs code: debug + debug console is best:
-        - place a breakpoint at the last print statement of tmp.py
-        - debug file (use keyboard shortcut)
-        - examine with debugger and console
-        - IMPORTANT: use a separate terminal for submitting while also
-          debugging. The vs code debugger may kill other vs code terminals if
-          you're not careful
-    - you can also debug tests with vs code. If you're at the point of writing
-      tests, you probably need to slow down and think :)
+    - vs code's rich REPL is great: shift+enter to send a chunk of code to the
+      REPL
+- be able to step-by-step debug: vs code's python debugger is great

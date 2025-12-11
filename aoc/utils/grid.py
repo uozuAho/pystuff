@@ -18,14 +18,20 @@ LEFT = WEST = -1 + 0j
 ORIGIN = (0, 0)
 
 
-def parsegrid(input: str, to_row: t.Callable[[str], list]):
+def parsegrid(input: str, to_row: t.Callable[[str], list], invert_y=False):
+    """
+    :param input: the whole input
+    :param to_row: convert one line to a row
+    :param invert_y: if True, y = 0 is the bottom row, else it's the top
+    """
     grid = []
     for line in input.splitlines():
         if not line.strip():
             continue
         grid.append(to_row(line))
-    # reverse for +y
-    return list(reversed(grid))
+    if invert_y:
+        return list(reversed(grid))
+    return grid
 
 
 def parse_chargrid(input: str):
