@@ -1,5 +1,5 @@
 from typing import Counter
-from pipe import where, map
+from pipe import where, map, tee, Pipe
 
 
 samp = """
@@ -64,3 +64,35 @@ sum(
     | where(isreal)
     | map(lambda x: x[-2])
 )
+
+
+# part2
+def rot(char: str, n: int):
+    return chr((ord(char) - 97 + n) % 26 + 97)
+
+def rotword(word: str, n: int):
+    return ''.join(rot(c, n) for c in word)
+
+def decrypt(bits):
+    *words, sec_id, checksum = bits
+    return [rotword(w, sec_id) for w in words] + [sec_id, checksum]
+
+@Pipe
+def ignore(iterable):
+    """ Force iteration and drop the result. Good for interactive dev with `tee`
+        without having to wrap the pipeline in list
+    """
+    things = []
+    for x in iterable:
+        things.append(x)
+    return None
+
+(
+    samp.splitlines()
+    | where(notempty)
+    | map(tobits)
+    | map(decrypt)
+    | where(lambda x: any('north' in str(w) for w in x))
+    | tee
+    | ignore
+) # type: ignore
