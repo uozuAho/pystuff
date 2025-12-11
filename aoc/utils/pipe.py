@@ -15,7 +15,13 @@ def pipe(init, *funcs):
 def pprint(x):
     if hasattr(x, "__next__"):
         x = list(x)
-    print(x)
+    if len(x) == 1:
+        print(x)
+    else:
+        print('[')
+        for y in x:
+            print('  ', y)
+        print(']')
     return x
 
 

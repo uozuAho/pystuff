@@ -25,6 +25,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "advent-of-code-data" },
     { name = "numpy" },
+    { name = "pipe" },
     { name = "pytest" },
     { name = "pytest-benchmark" },
     { name = "ruff" },
@@ -34,6 +35,7 @@ dependencies = [
 requires-dist = [
     { name = "advent-of-code-data", specifier = ">=2.1.0" },
     { name = "numpy", specifier = ">=2.2.6" },
+    { name = "pipe", specifier = ">=2.2" },
     { name = "pytest", specifier = ">=8.4.2" },
     { name = "pytest-benchmark", specifier = ">=5.2.0" },
     { name = "ruff", specifier = ">=0.14.8" },
@@ -125,6 +127,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/af/aa/730e2b815fed3680629bb9c6c84c3480952fb9067939b7549c789b77a6bc/pebble-5.1.3.tar.gz", hash = "sha256:9fdf00dde4abb09907817114ad8cf822836b6d6cc8f43a3f0ec741be276086e7", size = 39027, upload-time = "2025-07-30T21:16:34.87Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/42/42/218f3d1490af0c5f781f1e54fc1e4a2ca163643807d57890d2a246bd626d/Pebble-5.1.3-py3-none-any.whl", hash = "sha256:8b28b1ede25de4b0d9249516d5fd794c330f8f03b692debe374619317ed0bdd7", size = 36868, upload-time = "2025-07-30T21:16:33.133Z" },
+]
+
+[[package]]
+name = "pipe"
+version = "2.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/53/37/aef2cba01787ad8bd266705a95c23db0e9d0b7cd0e01582c969143892655/pipe-2.2.tar.gz", hash = "sha256:6a253198e3bc542ffaf0a4222376586bce8583b27a9ddbc2cfbaa554c049230d", size = 10456, upload-time = "2024-04-04T06:37:17.686Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1f/21/96f1508f67fadb4ab7e5df7c3389e4a2f03cba92f62846f99f6301cf0735/pipe-2.2-py3-none-any.whl", hash = "sha256:0a5c3202ff35122f69a34ccbd40c9658646f033cc941055304fe8bfa7e13376e", size = 9655, upload-time = "2024-04-04T06:37:16.383Z" },
 ]
 
 [[package]]
