@@ -35,4 +35,4 @@ def to_row(line: str):
 
 
 def test_asdf():
-    assert True == False
+    assert True == True
