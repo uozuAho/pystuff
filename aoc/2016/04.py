@@ -1,5 +1,6 @@
 from typing import Counter
 from pipe import where, map, tee, Pipe
+from utils.pipefriends import notempty, ignore
 
 
 samp = """
@@ -51,10 +52,6 @@ def isreal(bits):
 # )
 
 
-def notempty(thing):
-    return bool(thing)
-
-
 # OK pipe is pretty sweet
 sum(
     samp.splitlines()
@@ -70,29 +67,22 @@ sum(
 def rot(char: str, n: int):
     return chr((ord(char) - 97 + n) % 26 + 97)
 
+
 def rotword(word: str, n: int):
-    return ''.join(rot(c, n) for c in word)
+    return "".join(rot(c, n) for c in word)
+
 
 def decrypt(bits):
     *words, sec_id, checksum = bits
     return [rotword(w, sec_id) for w in words] + [sec_id, checksum]
 
-@Pipe
-def ignore(iterable):
-    """ Force iteration and drop the result. Good for interactive dev with `tee`
-        without having to wrap the pipeline in list
-    """
-    things = []
-    for x in iterable:
-        things.append(x)
-    return None
 
 (
     samp.splitlines()
     | where(notempty)
     | map(tobits)
     | map(decrypt)
-    | where(lambda x: any('north' in str(w) for w in x))
     | tee
+    | where(lambda x: any("north" in str(w) for w in x))
     | ignore
-) # type: ignore
+)  # type: ignore
