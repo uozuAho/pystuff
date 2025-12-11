@@ -18,10 +18,10 @@ def pprint(x):
     if len(x) == 1:
         print(x)
     else:
-        print('[')
+        print("[")
         for y in x:
-            print('  ', y)
-        print(']')
+            print("  ", y)
+        print("]")
     return x
 
 

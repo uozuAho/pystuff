@@ -1,7 +1,5 @@
 from typing import Counter
-import utils.pipe as p
-import utils.grid as g
-from pipe import where, map, tee
+from pipe import where, map
 
 
 samp = """
@@ -11,22 +9,24 @@ not-a-real-room-404[oarel]
 totally-real-room-200[decoy]
 """
 
+
 def tobits(line):
-    spl = line.split('-')
-    num, check = spl[-1].split('[')
-    check = check.replace(']', '')
+    spl = line.split("-")
+    num, check = spl[-1].split("[")
+    check = check.replace("]", "")
     return spl[:-1] + [int(num), check]
 
 
 def checksum(bits):
-    abc = ''.join(list(bits)[:-2])
+    abc = "".join(list(bits)[:-2])
     c = Counter(abc)
     srt = sorted(c.items(), key=lambda kv: (kv[1], -ord(kv[0])), reverse=True)
-    return ''.join(x[0] for x in srt)[:5]
+    return "".join(x[0] for x in srt)[:5]
 
 
 def isreal(bits):
     return bits[-1] == checksum(bits)
+
 
 # list comprehesions read nice but
 # - u have to name each temp result
@@ -53,6 +53,7 @@ def isreal(bits):
 
 def notempty(thing):
     return bool(thing)
+
 
 # OK pipe is pretty sweet
 sum(
