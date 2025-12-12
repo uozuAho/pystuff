@@ -22,7 +22,6 @@ def to_row(line: str):
 
 
 (
-    # TODO: add tests here and elsewhere ... inline?
     [g.parsegrid(samp, to_row)]
     | map(g.cols)
     | chain

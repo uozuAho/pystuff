@@ -1,6 +1,6 @@
-import utils.pipe as p
 import utils.grid as g
-import itertools
+from pipe import map, chain, batched
+from utils.pipefriends import add
 
 samp = """
   330  143  338
@@ -17,12 +17,21 @@ def isvalid(trpl):
     return s[0] + s[1] > s[2]
 
 
-p.pipe(
-    g.parsegrid(samp, lambda line: [int(n) for n in line.split()]),
-    g.cols,
-    p.flatten,
-    lambda x: itertools.batched(x, 3),
-    # pprint,
-    lambda x: map(isvalid, x),
-    sum,
-)
+def to_row(line: str):
+    return [int(x) for x in line.split()]
+
+
+(
+    [g.parsegrid(samp, to_row)]
+    | map(g.cols)
+    | chain
+    | chain
+    | batched(3)
+    | map(isvalid)
+    # | tee
+    | add
+)  # type: ignore
+
+
+def test_asdf():
+    assert True == True
