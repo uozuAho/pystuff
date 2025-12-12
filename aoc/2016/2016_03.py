@@ -21,7 +21,8 @@ def to_row(line: str):
     return [int(x) for x in line.split()]
 
 
-(
+def solve(input):
+    return (
     [g.parsegrid(samp, to_row)]
     | map(g.cols)
     | chain
@@ -30,8 +31,7 @@ def to_row(line: str):
     | map(isvalid)
     # | tee
     | add
-)  # type: ignore
+    )  # type: ignore
 
-
-def test_asdf():
-    assert True == True
+def test_solve():
+    assert solve(samp) == 5
