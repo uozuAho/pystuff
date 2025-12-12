@@ -31,13 +31,14 @@ def go(input: str, start=None) -> g.PosXy:
     return pos
 
 
+# fmt: off
 @pytest.mark.parametrize(
-    "directions, dist",
-    [
+    "directions, dist", [
         ("R2, L3", 5),
         ("R2, R2, R2", 2),
         ("R5, L5, R5, R3", 12)
     ]
 )
+# fmt: on
 def test_go(directions: str, dist: int):
     assert dist == g.manhattan_dist(go(directions))

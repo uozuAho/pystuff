@@ -31,7 +31,3 @@ def to_row(line: str):
     # | tee
     | add
 )  # type: ignore
-
-
-def test_asdf():
-    assert True == True

@@ -65,6 +65,7 @@ sum(
 
 # part2
 def rot(char: str, n: int):
+    # alternative: str.translate. See https://github.com/norvig/pytudes/blob/main/ipynb/Advent-2016.ipynb
     return chr((ord(char) - 97 + n) % 26 + 97)
 
 

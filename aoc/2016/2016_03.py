@@ -23,15 +23,16 @@ def to_row(line: str):
 
 def solve(input):
     return (
-    [g.parsegrid(samp, to_row)]
-    | map(g.cols)
-    | chain
-    | chain
-    | batched(3)
-    | map(isvalid)
-    # | tee
-    | add
+        [g.parsegrid(samp, to_row)]
+        | map(g.cols)
+        | chain
+        | chain
+        | batched(3)
+        | map(isvalid)
+        # | tee
+        | add
     )  # type: ignore
+
 
 def test_solve():
     assert solve(samp) == 5

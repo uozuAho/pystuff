@@ -83,10 +83,6 @@ def solve(input: str):
     return sum(1 if c else 0 for row in lights for c in row)
 
 
-def test_dummy():
-    assert True == True
-
-
 if __name__ == "__main__":
     year, day = 2015, 12
     real = get_data(year=year, day=day)
