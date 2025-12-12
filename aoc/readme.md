@@ -1,5 +1,9 @@
 # My advent of code solutions
 
+# TODO
+- figure out inline tests. idea: rename files to 20xx_xx.py, have inline tests,
+  use pytest
+
 # Quick start
 - install uv, make
 - clone repo
