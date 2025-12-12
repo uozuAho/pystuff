@@ -2,9 +2,11 @@
 p:
 	uv run python tmp.py print
 
-# as above, use pypy
+# as above, use pypy. Note you'll need to change
+# python version in project.toml and only use python
+# features supporte by pypy
 pp:
-	uv run --python pypy-3.11 tmp.py print
+	uv run --python pypy-3.11 tmp.py
 
 # submit
 s:

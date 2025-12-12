@@ -18,6 +18,8 @@
     - check make rules work. See Makefile. Install required python versions.
     - tmp.py and test_tmp.py open in vs code, have the debugger ready on
       keyboard shortcut
+    - pypy (`make pp`). Just in case - set the python version to 3.11 in
+      pyproject.toml
 - skim for important detail
 - if it's looking easy, submit answer ASAP (`make s`). If you get it wrong, you
   have a minute to debug before you can resubmit
