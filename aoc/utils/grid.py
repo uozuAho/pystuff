@@ -1,9 +1,4 @@
-"""2d grid of anything.
-Maybe this should replace chargrid?
-
-Origin = (0, 0), bottom left.
-+y is up
-"""
+"""2d grid of anything."""
 
 import typing as t
 

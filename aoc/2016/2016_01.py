@@ -1,5 +1,5 @@
 import pytest
-import utils.chargrid as g
+import utils.grid as g
 
 
 def go(input: str, start=None) -> g.PosXy:
