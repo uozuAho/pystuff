@@ -1,33 +1,53 @@
+from collections import Counter
 import utils.grid as g
 from pipe import map, chain, batched
-from utils.pipe import add
+from utils.pipe import add, ignore
 
-samp = """
-  330  143  338
-  769  547   83
-  930  625  317
-  669  866  147
-   15  881  210
-  662   15   70
+test = """
+eedadn
+drvtee
+eandsr
+raavrd
+atevrs
+tsrnev
+sdttsa
+rasrtv
+nssdts
+ntnada
+svetve
+tesnvt
+vntsnd
+vrdear
+dvrsen
+enarar
 """
 
 
-def isvalid(trpl):
-    s = sorted(trpl)
-    return s[0] + s[1] > s[2]
+# same but way more elegant: https://github.com/iKevinY/advent/blob/main/2016/day06.py
+
+def solve(input: str):
+    grid = g.parse_chargrid(input)
+    c = [Counter(col) for col in g.cols(grid)]
+    letters = [x.most_common(1) for x in c]
+    return ''.join(x[0][0] for x in letters)
 
 
-def to_row(line: str):
-    return [int(x) for x in line.split()]
+def solve2(input: str):
+    grid = g.parse_chargrid(input)
+    c = [Counter(col) for col in g.cols(grid)]
+    letters = [x.most_common()[-1] for x in c]
+    return ''.join(x[0][0] for x in letters)
 
+from pipe import tee, map
 
-(
-    [g.parsegrid(samp, to_row)]
-    | map(g.cols)
-    | chain
-    | chain
-    | batched(3)
-    | map(isvalid)
-    # | tee
-    | add
-)  # type: ignore
+def pipesolve1(input):
+    return ''.join(
+    g.cols(g.parse_chargrid(input))
+    | map(Counter)
+    | map(lambda x: x.most_common()[0][0])
+    )
+
+def test_sols():
+    assert solve(test) == "easter"
+    assert solve2(test) == "advent"
+    assert pipesolve1(test) == "easter"
