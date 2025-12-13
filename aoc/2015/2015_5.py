@@ -1,10 +1,8 @@
-import sys
 import re
-from aocd import get_data, submit
 
 year, day = 2015, 5
 
-raw = get_data(year=year, day=day)
+# raw = get_data(year=year, day=day)
 
 
 def single1(line: str):
@@ -51,18 +49,18 @@ def solve(input: str):
     return sum(1 if single2(line) else 0 for line in input.splitlines())
 
 
-if "print" in sys.argv:
-    print(solve(raw))
+# if "print" in sys.argv:
+#     print(solve(raw))
 
-elif "submit" in sys.argv:
-    # submit works out what part to submit
-    submit(solve(raw), year=year, day=day)
+# elif "submit" in sys.argv:
+#     # submit works out what part to submit
+#     submit(solve(raw), year=year, day=day)
 
-else:
-    solve(raw)
-    # breakpoint here to run/debug interactively
-    # This is better in vscode than IDLE or python -i
-    print("yo")
+# else:
+#     solve(raw)
+#     # breakpoint here to run/debug interactively
+#     # This is better in vscode than IDLE or python -i
+#     print("yo")
 
 
 # single

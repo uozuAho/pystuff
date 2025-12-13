@@ -1,9 +1,6 @@
-import sys
-from aocd import get_data, submit
-
 year, day = 2015, 5
 
-real = get_data(year=year, day=day)
+# real = get_data(year=year, day=day)
 
 # samp = real
 samp = """1"""
@@ -32,14 +29,14 @@ def solve(input: str):
     return len(out)
 
 
-if "print" in sys.argv:
-    print(solve(samp))
+# if "print" in sys.argv:
+#     print(solve(samp))
 
-elif "submit" in sys.argv:
-    submit(solve(real), year=year, day=day)
+# elif "submit" in sys.argv:
+#     submit(solve(real), year=year, day=day)
 
-else:
-    solve(samp)
-    # breakpoint here to run/debug interactively
-    # This is better in vscode than IDLE or python -i
-    print("yo")
+# else:
+#     solve(samp)
+#     # breakpoint here to run/debug interactively
+#     # This is better in vscode than IDLE or python -i
+#     print("yo")

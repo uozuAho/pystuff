@@ -1,10 +1,8 @@
-from aocd import get_data, submit
-
 year, day = 2015, 2
 
 sample = "(())"
 
-raw = get_data(year=year, day=day)
+# raw = get_data(year=year, day=day)
 
 
 def solve1(str: str):
@@ -29,4 +27,4 @@ def solve2(str: str):
 
 # submit works out what part to submit
 # submit(solve1(raw), year=year, day=day)
-submit(solve2(raw), year=year, day=day)
+# submit(solve2(sample), year=year, day=day)

@@ -1,6 +1,4 @@
 import re
-import sys
-from aocd import get_data, submit
 
 # ew i hate my solution. Still i solved it in ok time (30 min). Couldn't find
 # any others' solutions that i liked.
@@ -49,13 +47,13 @@ def solve2(input: str):
     return best
 
 
-if __name__ == "__main__":
-    year, day = 2015, 12
-    real = get_data(year=year, day=day)
+# if __name__ == "__main__":
+#     year, day = 2015, 12
+#     real = get_data(year=year, day=day)
 
-    if "print" in sys.argv:
-        print(solve2(samp))
-    elif "submit" in sys.argv:
-        submit(solve2(real), year=year, day=day)
-    else:
-        solve2(samp)
+#     if "print" in sys.argv:
+#         print(solve2(samp))
+#     elif "submit" in sys.argv:
+#         submit(solve2(real), year=year, day=day)
+#     else:
+#         solve2(samp)

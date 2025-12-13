@@ -1,9 +1,8 @@
 from dataclasses import dataclass
-from aocd import get_data
 
 year, day = 2015, 5
 
-real = get_data(year=year, day=day)
+# real = get_data(year=year, day=day)
 
 # samp = real
 samp = """

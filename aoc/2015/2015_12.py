@@ -1,6 +1,4 @@
 from collections.abc import Iterable
-import sys
-from aocd import get_data, submit
 import json
 
 
@@ -62,13 +60,13 @@ if __name__ == "__main__":
     assert solve2("[1,2,3]") == 6
     assert solve2("""[1,{"c":"red","b":2},3]""") == 4
 
-    year, day = 2015, 12
-    real = get_data(year=year, day=day)
-    samp = real
+    # year, day = 2015, 12
+    # real = get_data(year=year, day=day)
+    # samp = real
 
-    if "print" in sys.argv:
-        print(solve(samp))
-    elif "submit" in sys.argv:
-        submit(solve2(real), year=year, day=day)
-    else:
-        solve(samp)
+    # if "print" in sys.argv:
+    #     print(solve(samp))
+    # elif "submit" in sys.argv:
+    #     submit(solve2(real), year=year, day=day)
+    # else:
+    #     solve(samp)

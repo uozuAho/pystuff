@@ -1,6 +1,4 @@
 import itertools
-import sys
-from aocd import get_data, submit
 
 samp = """20
 15
@@ -25,13 +23,13 @@ def solve(input: str):
     return sum(1 if len(x) == minlen else 0 for x in combos)
 
 
-if __name__ == "__main__":
-    year, day = 2015, 17
-    real = get_data(year=year, day=day)
+# if __name__ == "__main__":
+#     year, day = 2015, 17
+#     real = get_data(year=year, day=day)
 
-    if "print" in sys.argv:
-        print(solve(samp))
-    elif "submit" in sys.argv:
-        submit(solve(real), year=year, day=day)
-    else:
-        solve(samp)
+#     if "print" in sys.argv:
+#         print(solve(samp))
+#     elif "submit" in sys.argv:
+#         submit(solve(real), year=year, day=day)
+#     else:
+#         solve(samp)

@@ -1,12 +1,10 @@
 # this one's much better: https://github.com/r-sreeram/adventofcode/blob/main/2015/2015-6.py
 
-import sys
-from aocd import get_data, submit
 import numpy as np
 
 year, day = 2015, 6
 
-raw = get_data(year=year, day=day)
+# raw = get_data(year=year, day=day)
 
 
 def coords(line: str):
@@ -49,14 +47,14 @@ def solve2(input: str, size=((1000, 1000))):
     return ll.sum()
 
 
-if "print" in sys.argv:
-    print(solve2(raw, (5, 5)))
+# if "print" in sys.argv:
+#     print(solve2(raw, (5, 5)))
 
-elif "submit" in sys.argv:
-    submit(solve2(raw), year=year, day=day)
+# elif "submit" in sys.argv:
+#     submit(solve2(raw), year=year, day=day)
 
-else:
-    solve2(raw)
-    # breakpoint here to run/debug interactively
-    # This is better in vscode than IDLE or python -i
-    print("yo")
+# else:
+#     solve2(raw)
+#     # breakpoint here to run/debug interactively
+#     # This is better in vscode than IDLE or python -i
+#     print("yo")

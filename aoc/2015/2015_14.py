@@ -1,7 +1,5 @@
 from collections import Counter, defaultdict
 import re
-import sys
-from aocd import get_data, submit
 
 samp = """
 asdf can fly 22 km/s for 8 seconds, but then must rest for 165 seconds.
@@ -63,13 +61,13 @@ def solve2(input: str, time_s=2503):
     return max(scores.values())
 
 
-if __name__ == "__main__":
-    year, day = 2015, 14
-    real = get_data(year=year, day=day)
+# if __name__ == "__main__":
+#     year, day = 2015, 14
+#     real = get_data(year=year, day=day)
 
-    if "print" in sys.argv:
-        print(solve2(samp))
-    elif "submit" in sys.argv:
-        submit(solve2(real), year=year, day=day)
-    else:
-        solve2(samp)
+#     if "print" in sys.argv:
+#         print(solve2(samp))
+#     elif "submit" in sys.argv:
+#         submit(solve2(real), year=year, day=day)
+#     else:
+#         solve2(samp)

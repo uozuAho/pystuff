@@ -1,8 +1,6 @@
 from collections import defaultdict
 import itertools
 import re
-import sys
-from aocd import get_data, submit
 
 # much nicer: https://github.com/r-sreeram/adventofcode/blob/main/2015/2015-13.py
 
@@ -76,13 +74,13 @@ def solve2(input: str):
     return max_total
 
 
-if __name__ == "__main__":
-    year, day = 2015, 13
-    real = get_data(year=year, day=day)
+# if __name__ == "__main__":
+#     year, day = 2015, 13
+#     real = get_data(year=year, day=day)
 
-    if "print" in sys.argv:
-        print(solve2(samp))
-    elif "submit" in sys.argv:
-        submit(solve2(real), year=year, day=day)
-    else:
-        solve2(samp)
+#     if "print" in sys.argv:
+#         print(solve2(samp))
+#     elif "submit" in sys.argv:
+#         submit(solve2(real), year=year, day=day)
+#     else:
+#         solve2(samp)

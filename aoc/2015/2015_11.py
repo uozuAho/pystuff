@@ -1,12 +1,10 @@
 import re
-import sys
-from aocd import get_data, submit
 
 year, day = 2015, 11
 
-real = get_data(year=year, day=day)
+# real = get_data(year=year, day=day)
 
-samp = real
+# samp = real
 
 
 # increment one character
@@ -68,9 +66,9 @@ if __name__ == "__main__":
     assert isvalid("ghjaabcc")
     assert solve("abcdefgh") == "abcdffaa"
 
-    if "print" in sys.argv:
-        print(solve(samp))
-    elif "submit" in sys.argv:
-        submit(solve(real), year=year, day=day)
-    else:
-        solve(samp)
+    # if "print" in sys.argv:
+    #     print(solve(samp))
+    # elif "submit" in sys.argv:
+    #     submit(solve(real), year=year, day=day)
+    # else:
+    #     solve(samp)

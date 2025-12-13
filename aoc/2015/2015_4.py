@@ -1,11 +1,10 @@
 import hashlib
-from aocd import get_data, submit
 
 year, day = 2015, 4
 
 sample = ""
 
-raw = get_data(year=year, day=day)
+# raw = get_data(year=year, day=day)
 
 
 def solve(input: str):
@@ -24,4 +23,4 @@ def solve2(input: str):
             return i
 
 
-submit(solve(raw), year=year, day=day)
+# submit(solve(raw), year=year, day=day)
