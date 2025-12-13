@@ -1,8 +1,4 @@
 import re
-from pipe import tee, map, where
-from utils.input import lines
-from utils.pipe import ignore
-import itertools
 
 test1 = """
 abba[mnop]qrst
