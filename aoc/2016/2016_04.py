@@ -1,6 +1,6 @@
 from typing import Counter
 from pipe import where, map, tee
-from utils.pipefriends import notempty, ignore
+from utils.pipe import notempty, ignore
 
 
 samp = """

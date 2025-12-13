@@ -1,6 +1,6 @@
 import utils.grid as g
 from pipe import map, chain, batched
-from utils.pipefriends import add
+from utils.pipe import add
 
 samp = """
   330  143  338
