@@ -1,14 +1,10 @@
-import hashlib as hsh
-
-
-def hash(str):
-    return hsh.md5(bytes(str, encoding="utf-8")).hexdigest()
+from utils.hash import md5
 
 
 def password(doorid: str):
     passw = []
     for i in range(999999999999):
-        tmphash = hash(doorid + str(i))
+        tmphash = md5(doorid + str(i))
         if tmphash.startswith("00000"):
             passw.append(tmphash[5])
             print(i, tmphash)
@@ -20,7 +16,7 @@ def password(doorid: str):
 def password2(doorid: str):
     passw = [" "] * 8
     for i in range(999999999999):
-        tmphash = hash(doorid + str(i))
+        tmphash = md5(doorid + str(i))
         if tmphash.startswith("00000"):
             pos = tmphash[5]
             try:
@@ -35,4 +31,4 @@ def password2(doorid: str):
 
 
 # print(password2("abc"))
-# print(password2("ojvtpuvg"))
+# print(password2("ojvtpuvg"))s
