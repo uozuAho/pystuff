@@ -29,7 +29,19 @@ def parsegrid(input: str, to_row: t.Callable[[str], list], invert_y=False):
     return grid
 
 
-def parse_chargrid(input: str):
+def copy(grid: Grid):
+    return [row[:] for row in grid]
+
+
+def tostr(grid: Grid):
+    return "\n".join("".join(row) for row in grid)
+
+
+def render(grid: Grid):
+    return tostr(grid)
+
+
+def chargrid(input: str):
     return parsegrid(input, lambda line: [c for c in line.strip()])
 
 

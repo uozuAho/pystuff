@@ -27,14 +27,14 @@ enarar
 
 
 def solve(input: str):
-    grid = g.parse_chargrid(input)
+    grid = g.chargrid(input)
     c = [Counter(col) for col in g.cols(grid)]
     letters = [x.most_common(1) for x in c]
     return "".join(x[0][0] for x in letters)
 
 
 def solve2(input: str):
-    grid = g.parse_chargrid(input)
+    grid = g.chargrid(input)
     c = [Counter(col) for col in g.cols(grid)]
     letters = [x.most_common()[-1] for x in c]
     return "".join(x[0][0] for x in letters)

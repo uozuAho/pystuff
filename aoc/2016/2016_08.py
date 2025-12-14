@@ -1,5 +1,6 @@
 from collections import Counter
 from utils import grid as g
+from utils.basic import count
 from utils.input import lines
 
 # norvig's is so much cleaner: https://github.com/norvig/pytudes/blob/main/ipynb/Advent-2016.ipynb
