@@ -13,3 +13,4 @@ wheels/
 # misc
 .benchmarks
 .pytest_cache
+.idea
