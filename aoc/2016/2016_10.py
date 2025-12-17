@@ -4,7 +4,6 @@ from pipe import map, where, Pipe
 
 from utils.basic import get_or_add
 from utils.input import lines
-from utils.assertions import assertt
 import re
 
 LOG_ENABLED = False
@@ -43,7 +42,7 @@ def find(input: str, goalbot: set[int] = None, goalouts: set[int] = None):
 
     def addval(node: Node, val: int):
         nonlocal goalnode
-        assertt(len(node.inputs) < 2)
+        assert len(node.inputs) < 2
         node.inputs.append(val)
         if set(node.inputs) == goalbot:
             goalnode = node
@@ -73,8 +72,8 @@ def find(input: str, goalbot: set[int] = None, goalouts: set[int] = None):
             nodeb = get_or_add(conn, blabel, Node(blabel))
             nodec = get_or_add(conn, clabel, Node(clabel))
             log(nodea)
-            assertt(nodea.clo is None)
-            assertt(nodea.chi is None)
+            assert nodea.clo is None
+            assert nodea.chi is None
             nodea.clo = nodeb
             nodea.chi = nodec
             log(nodea)
@@ -110,7 +109,7 @@ def test_part2():
 def parse_conn_labels(line: str):
     patt = r"bot (\d+) gives low to (\w+) (\d+) and high to (\w+) (\d+)"
     m = re.search(patt, line)
-    assertt(m is not None)
+    assert m is not None
     bfrom, lotype, lonum, hitype, hinum = m.groups()
     return (
         bfrom,
@@ -148,7 +147,7 @@ def parseval(line: str):
 
 def addval(conn: dict[str, Node], val: str, bot: str):
     node = get_or_add(conn, bot, Node(bot))
-    assertt(len(node.inputs) < 2)
+    assert len(node.inputs) < 2
     node.inputs.append(int(val))
     return conn
 
