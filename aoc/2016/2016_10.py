@@ -27,8 +27,8 @@ def log(*msg):
 class Node:
     label: str
     inputs: list[int] = field(default_factory=list)
-    clo: Node | None = None
-    chi: Node | None = None
+    clo: "Node" = None
+    chi: "Node" = None
 
     def __str__(self):
         clo = "" if self.clo is None else self.clo.label

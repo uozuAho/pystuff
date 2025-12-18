@@ -59,7 +59,34 @@ def state_to_pic(state: State) -> str:
     return "\n".join(floors)
 
 
-def move(state: State, fromlevel: int, tolevel: int, items) -> State:
+def is_valid_floor(floor: frozenset[str]) -> bool:
+    if len(floor) <= 1:
+        return True
+    for m in floor:
+        if m.endswith("M"):
+            hasowngen = False
+            hasothergen = False
+            for g in floor:
+                if g.endswith("G") and g.startswith(m[:3]):
+                    hasowngen = True
+                if g.endswith("G") and not g.startswith(m[:3]):
+                    hasothergen = True
+            if hasothergen and not hasowngen:
+                return False
+    return True
+
+
+assert is_valid_floor([])
+assert is_valid_floor(["E"])
+assert is_valid_floor(["E", "ROCM"])
+assert is_valid_floor(["E", "ROCG"])
+assert is_valid_floor(["E", "ROCM", "ROCG"])
+assert not is_valid_floor(["ROCM", "ASDG"])
+assert not is_valid_floor(["E", "ROCM", "ASDG"])
+assert not is_valid_floor({"POLM", "THUM", "POLG"})
+
+
+def move(state: State, fromlevel: int, tolevel: int, items) -> State | None:
     assert abs(fromlevel - tolevel) == 1
     assert fromlevel in VALID_LEVELS
     assert tolevel in VALID_LEVELS
@@ -68,26 +95,18 @@ def move(state: State, fromlevel: int, tolevel: int, items) -> State:
     assert itemset <= state[fromlevel]
     assert len(items) > 0
     newfrom: frozenset[str] = frozenset(state[fromlevel] - {"E"} - itemset)
+    if not is_valid_floor(newfrom):
+        return None
     newto: frozenset[str] = frozenset(state[tolevel] | {"E"} | itemset)
-    return tuple(
-        newfrom if i == fromlevel else newto if i == tolevel else floor
-        for i, floor in enumerate(state)
+    if not is_valid_floor(newto):
+        return None
+
+    return (
+        newfrom if fromlevel == 0 else newto if tolevel == 0 else state[0],
+        newfrom if fromlevel == 1 else newto if tolevel == 1 else state[1],
+        newfrom if fromlevel == 2 else newto if tolevel == 2 else state[2],
+        newfrom if fromlevel == 3 else newto if tolevel == 3 else state[3],
     )
-
-
-def is_valid_floor(floor: set[str]) -> bool:
-    chips = [x[:-1] for x in floor if x != "E" and x.endswith("M")]
-    gens = [x[:-1] for x in floor if x != "E" and x.endswith("G")]
-    if not gens:
-        return True
-    for chip in chips:
-        if gens and chip not in gens:
-            return False
-    return True
-
-
-def is_valid_state(state: State) -> bool:
-    return all(is_valid_floor(f) for f in state)
 
 
 def gen_states(state: State):
@@ -97,8 +116,14 @@ def gen_states(state: State):
     for adj in adj_levels:
         for carry in chain(combinations(things, 1), combinations(things, 2)):
             newstate = move(state, elevel, adj, carry)
-            if is_valid_state(newstate):
+            if newstate:
                 yield newstate
+
+
+assert (
+    len(list(gen_states([{"E", "POLG", "POLM", "THUG", "THUM"}, set(), set(), set()])))
+    == 6
+)
 
 
 def est_moves(state: State):
@@ -119,10 +144,9 @@ def render(state: State):
 def solve(input: str):
     init = pic_to_state(input)
     path = astar.astar_search(init, est_moves, gen_states)
-    # for x in path:
-    #     print('------')
-    #     print(render(x))
-    return len(path) - 1
+    return len(path) - 1 if path else None
+
+print(solve(test_pic))
 
 
 def test_solve():
@@ -186,12 +210,22 @@ def gen_states_sym(state: State):
                     continue
 
             newstate = move(state, elevel, adj, carry)
-            if is_valid_state(newstate):
+            if newstate:
                 yield newstate
 
 
-assert len(list(gen_states([{"E", "POLG", "POLM", "THUG", "THUM"}, set()]))) == 6
-assert len(list(gen_states_sym([{"E", "POLG", "POLM", "THUG", "THUM"}, set()]))) == 4
+assert (
+    len(list(gen_states([{"E", "POLG", "POLM", "THUG", "THUM"}, set(), set(), set()])))
+    == 6
+)
+assert (
+    len(
+        list(
+            gen_states_sym([{"E", "POLG", "POLM", "THUG", "THUM"}, set(), set(), set()])
+        )
+    )
+    == 4
+)
 
 
 def solve_fast(input: str):
