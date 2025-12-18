@@ -59,7 +59,7 @@ def state_to_pic(state: State) -> str:
     return "\n".join(floors)
 
 
-def is_valid_floor(floor: set[str]) -> bool:
+def is_valid_floor(floor: frozenset[str]) -> bool:
     chips = [x[:-1] for x in floor if x != "E" and x.endswith("M")]
     gens = [x[:-1] for x in floor if x != "E" and x.endswith("G")]
     if not gens:
@@ -84,9 +84,12 @@ def move(state: State, fromlevel: int, tolevel: int, items) -> State | None:
     newto: frozenset[str] = frozenset(state[tolevel] | {"E"} | itemset)
     if not is_valid_floor(newto):
         return None
-    return tuple(
-        newfrom if i == fromlevel else newto if i == tolevel else floor
-        for i, floor in enumerate(state)
+
+    return (
+        newfrom if fromlevel == 0 else newto if tolevel == 0 else state[0],
+        newfrom if fromlevel == 1 else newto if tolevel == 1 else state[1],
+        newfrom if fromlevel == 2 else newto if tolevel == 2 else state[2],
+        newfrom if fromlevel == 3 else newto if tolevel == 3 else state[3],
     )
 
 
@@ -190,8 +193,8 @@ def gen_states_sym(state: State):
                 yield newstate
 
 
-assert len(list(gen_states([{"E", "POLG", "POLM", "THUG", "THUM"}, set()]))) == 6
-assert len(list(gen_states_sym([{"E", "POLG", "POLM", "THUG", "THUM"}, set()]))) == 4
+assert len(list(gen_states([{"E", "POLG", "POLM", "THUG", "THUM"}, set(), set(), set()]))) == 6
+assert len(list(gen_states_sym([{"E", "POLG", "POLM", "THUG", "THUM"}, set(), set(), set()]))) == 4
 
 
 def solve_fast(input: str):
