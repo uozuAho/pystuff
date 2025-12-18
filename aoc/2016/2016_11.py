@@ -1,7 +1,8 @@
 # took a bunch of ideas from norvig for this one:
 # https://github.com/norvig/pytudes/blob/main/ipynb/Advent-2016.ipynb
-
+import itertools
 import math
+import time
 from itertools import combinations, chain
 import utils.astar as astar
 
@@ -77,6 +78,8 @@ def move(state: State, fromlevel: int, tolevel: int, items) -> State:
 def is_valid_floor(floor: set[str]) -> bool:
     chips = [x[:-1] for x in floor if x != "E" and x.endswith("M")]
     gens = [x[:-1] for x in floor if x != "E" and x.endswith("G")]
+    if not gens:
+        return True
     for chip in chips:
         if gens and chip not in gens:
             return False
@@ -123,7 +126,7 @@ def solve(input: str):
 
 
 # solve(test_pic)
-# solve(real_pic)
+# solve(real_pic)   # 12 sec-ish
 
 p2_pic = """
 F1 E POLG THUG THUM PROG RUTG RUTM COBG COBM ELEG ELEM DILG DILM
@@ -136,3 +139,66 @@ F4
 # norvig mentions symmetry breaking to speed things up
 # AOC says all probs have a solution that completes in ~15s on old hardware
 # solve(p2_pic)
+
+
+def pairs(floor: frozenset[str]):
+    for k, g in itertools.groupby(sorted(floor), key=lambda f: f[:3]):
+        gg = tuple(g)
+        if len(gg) > 1:
+            yield gg
+
+assert list(pairs(['polg', 'thum'])) == []
+assert list(pairs(['polg', 'polm'])) == [('polg', 'polm')]
+assert list(pairs({'POLM', 'THUG', 'THUM', 'POLG'})) == [('POLG', 'POLM'), ('THUG', 'THUM')]
+
+
+def gen_states_sym(state: State):
+    """ Same as gen_states, but try to exclude symmetries """
+    elevel, efloor = [(i, f) for i, f in enumerate(state) if "E" in f][0]
+    adj_levels = {elevel + 1, elevel - 1} & VALID_LEVELS
+    things = efloor - {"E"}
+
+    # if there's more than one pair of chip+gen on a floor, carry any
+    # pair is equivalent, so only try one
+    p = list(pairs(things))
+    ignore_pairs = frozenset(frozenset(x) for x in p[1:])
+
+    # carrying any 1 chip to an empty floor is equivalent
+    efloorchips = [x for x in efloor if x.endswith("M")]
+    ignore_chips = frozenset(efloorchips[1:])
+
+    for adj in adj_levels:
+        destfloor = state[adj]
+        for carry in chain(combinations(things, 1), combinations(things, 2)):
+            if frozenset(carry) in ignore_pairs:
+                continue
+
+            if len(destfloor) == 0 and ignore_chips:
+                if len(carry) == 1 and carry[0] in ignore_chips:
+                    continue
+
+            newstate = move(state, elevel, adj, carry)
+            if is_valid_state(newstate):
+                yield newstate
+
+
+assert len(list(gen_states([{'E', 'POLG', 'POLM', 'THUG', 'THUM'}, set()]))) == 6
+assert len(list(gen_states_sym([{'E', 'POLG', 'POLM', 'THUG', 'THUM'}, set()]))) == 4
+
+def solve_fast(input: str):
+    init = pic_to_state(input)
+    path = astar.astar_search(init, est_moves, gen_states_sym)
+    return len(path) - 1
+
+def timeit(func):
+    start = time.perf_counter()
+    func()
+    end = time.perf_counter()
+    print("time: ", end - start)
+
+
+# timeit(lambda: solve_fast(test_pic))
+# timeit(lambda: solve(real_pic)) # 7.5sec
+# timeit(lambda: solve_fast(real_pic)) # 8sec, doh!
+
+# meh, exercise for later: make it fast. There's threads on reddit about this one.
