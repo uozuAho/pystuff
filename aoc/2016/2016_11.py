@@ -4,7 +4,7 @@ import itertools
 import math
 import time
 from itertools import combinations, chain
-import utils.astar as astar
+import algs.astar as astar
 
 from utils.input import lines
 
@@ -125,6 +125,10 @@ def solve(input: str):
     return len(path) - 1
 
 
+def test_solve():
+    assert solve(test_pic) == 11
+
+
 # solve(test_pic)
 # solve(real_pic)   # 12 sec-ish
 
@@ -147,13 +151,17 @@ def pairs(floor: frozenset[str]):
         if len(gg) > 1:
             yield gg
 
-assert list(pairs(['polg', 'thum'])) == []
-assert list(pairs(['polg', 'polm'])) == [('polg', 'polm')]
-assert list(pairs({'POLM', 'THUG', 'THUM', 'POLG'})) == [('POLG', 'POLM'), ('THUG', 'THUM')]
+
+assert list(pairs(["polg", "thum"])) == []
+assert list(pairs(["polg", "polm"])) == [("polg", "polm")]
+assert list(pairs({"POLM", "THUG", "THUM", "POLG"})) == [
+    ("POLG", "POLM"),
+    ("THUG", "THUM"),
+]
 
 
 def gen_states_sym(state: State):
-    """ Same as gen_states, but try to exclude symmetries """
+    """Same as gen_states, but try to exclude symmetries"""
     elevel, efloor = [(i, f) for i, f in enumerate(state) if "E" in f][0]
     adj_levels = {elevel + 1, elevel - 1} & VALID_LEVELS
     things = efloor - {"E"}
@@ -182,13 +190,15 @@ def gen_states_sym(state: State):
                 yield newstate
 
 
-assert len(list(gen_states([{'E', 'POLG', 'POLM', 'THUG', 'THUM'}, set()]))) == 6
-assert len(list(gen_states_sym([{'E', 'POLG', 'POLM', 'THUG', 'THUM'}, set()]))) == 4
+assert len(list(gen_states([{"E", "POLG", "POLM", "THUG", "THUM"}, set()]))) == 6
+assert len(list(gen_states_sym([{"E", "POLG", "POLM", "THUG", "THUM"}, set()]))) == 4
+
 
 def solve_fast(input: str):
     init = pic_to_state(input)
     path = astar.astar_search(init, est_moves, gen_states_sym)
     return len(path) - 1
+
 
 def timeit(func):
     start = time.perf_counter()

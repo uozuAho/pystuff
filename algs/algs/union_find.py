@@ -37,7 +37,7 @@ class QuickFindUF:
     def _validate(self, p: int) -> None:
         n = len(self._id)
         if not 0 <= p < n:
-            raise IndexError(f"index {p} is not between 0 and {n-1}")
+            raise IndexError(f"index {p} is not between 0 and {n - 1}")
 
     def __len__(self) -> int:
         return len(self._id)
@@ -69,7 +69,7 @@ class QuickUnionUF:
     def _validate(self, p: int) -> None:
         n = len(self._parent)
         if not 0 <= p < n:
-            raise IndexError(f"index {p} is not between 0 and {n-1}")
+            raise IndexError(f"index {p} is not between 0 and {n - 1}")
 
     def connected(self, p: int, q: int) -> bool:
         return self.find(p) == self.find(q)

@@ -1,9 +1,5 @@
 # My advent of code solutions
 
-# TODO
-- try sym breaking
-- put astar in algs, symlink here?
-
 # Quick start
 - install uv, make
 - clone repo
