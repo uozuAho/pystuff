@@ -43,3 +43,9 @@ precommit: format lint test
 
 clean:
 	rm -rf __pycache__ .benchmarks .pytest_cache .ruff_cache .venv
+
+prof:
+	uv run python -m profiling.sampling tmp.py
+
+proflame:
+	uv run python -m profiling.sampling --flamegraph tmp.py

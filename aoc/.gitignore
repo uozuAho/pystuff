@@ -14,3 +14,4 @@ wheels/
 .benchmarks
 .pytest_cache
 .idea
+flamegraph.*.html
