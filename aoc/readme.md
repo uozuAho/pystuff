@@ -24,3 +24,5 @@
     - vs code's rich REPL is great: shift+enter to send a chunk of code to the
       REPL
 - be able to step-by-step debug: vs code's python debugger is great
+- more important in later/difficult puzzles: don't rush. Assert early and often -
+  it takes more time to fix bugs the later you find them.

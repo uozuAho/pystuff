@@ -73,6 +73,13 @@ def cols(grid: Grid) -> Grid:
     return transpose(grid)
 
 
+def adjxy(pos: PosXy, diag=False):
+    if diag:
+        raise NotImplementedError()
+    x, y = pos
+    return (x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)
+
+
 def adj(grid: Grid, pos: PosXy):
     """Adjacent cell values, in row-major order. No wrap."""
     x, y = pos
