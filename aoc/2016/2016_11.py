@@ -4,6 +4,8 @@ import itertools
 import math
 import time
 from itertools import combinations, chain
+from pprint import pprint
+
 import algs.astar as astar
 
 from utils.input import lines
@@ -67,9 +69,9 @@ def is_valid_floor(floor: frozenset[str]) -> bool:
             hasowngen = False
             hasothergen = False
             for g in floor:
-                if g.endswith("G") and g.startswith(m[:3]):
+                if g.endswith("G") and g.startswith(m[:-1]):
                     hasowngen = True
-                if g.endswith("G") and not g.startswith(m[:3]):
+                if g.endswith("G") and not g.startswith(m[:-1]):
                     hasothergen = True
             if hasothergen and not hasowngen:
                 return False
@@ -78,9 +80,13 @@ def is_valid_floor(floor: frozenset[str]) -> bool:
 
 assert is_valid_floor([])
 assert is_valid_floor(["E"])
+assert is_valid_floor(["HM"])
 assert is_valid_floor(["E", "ROCM"])
 assert is_valid_floor(["E", "ROCG"])
 assert is_valid_floor(["E", "ROCM", "ROCG"])
+assert is_valid_floor(['HG', 'E', 'HM'])
+assert not is_valid_floor(['LM', 'HG', 'E', 'HM'])
+assert not is_valid_floor(['LM', 'HG', 'E'])
 assert not is_valid_floor(["ROCM", "ASDG"])
 assert not is_valid_floor(["E", "ROCM", "ASDG"])
 assert not is_valid_floor({"POLM", "THUM", "POLG"})
@@ -143,14 +149,12 @@ def render(state: State):
 
 def solve(input: str):
     init = pic_to_state(input)
-    path = astar.astar_search(init, est_moves, gen_states)
-    return len(path) - 1 if path else None
-
-print(solve(test_pic))
-
+    path, stats = astar.astar_search(init, est_moves, gen_states)
+    return len(path) - 1, stats
 
 def test_solve():
-    assert solve(test_pic) == 11
+    pathlen, _ = solve(test_pic)
+    assert pathlen == 11
 
 
 # solve(test_pic)
@@ -230,7 +234,8 @@ assert (
 
 def solve_fast(input: str):
     init = pic_to_state(input)
-    path = astar.astar_search(init, est_moves, gen_states_sym)
+    path, n, f = astar.astar_search(init, est_moves, gen_states_sym)
+    print("pathlen: ", len(path), "num explored: ", n, "frontier: ", f)
     return len(path) - 1
 
 

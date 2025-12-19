@@ -19,7 +19,7 @@ def astar_search(start, h_func, moves_func):
     moves_func: function that takes a state and returns all valid
             subsequent states
 
-    Returns: list[state]: path from start to goal, or None if no path found
+    Returns: [shortest path], {stats}
     """
     # A priority queue, ordered by path length, f = g + h
     frontier = [(h_func(start), start)]
@@ -30,10 +30,16 @@ def astar_search(start, h_func, moves_func):
     # The cost of the best path to a state.
     path_cost = {start: 0}
 
+    num_explored = 0
+
     while frontier:
         (f, s) = heapq.heappop(frontier)
+        num_explored += 1
         if h_func(s) == 0:
-            return path(previous, s)
+            return path(previous, s), {
+                "num_explored": num_explored,
+                "len(frontier)": len(frontier)
+            }
         for ns in moves_func(s):
             new_cost = path_cost[s] + 1
             if ns not in path_cost or new_cost < path_cost[ns]:
@@ -42,4 +48,4 @@ def astar_search(start, h_func, moves_func):
                 heapq.heappush(frontier, (new_cost + h_func(ns), ns))
                 path_cost[ns] = new_cost
                 previous[ns] = s
-    return None
+    return None, None
