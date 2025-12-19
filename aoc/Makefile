@@ -41,6 +41,8 @@ lintfix:
 
 precommit: format lint test
 
+pc: precommit
+
 clean:
 	rm -rf __pycache__ .benchmarks .pytest_cache .ruff_cache .venv
 

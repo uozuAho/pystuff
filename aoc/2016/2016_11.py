@@ -4,7 +4,6 @@ import itertools
 import math
 import time
 from itertools import combinations, chain
-from pprint import pprint
 
 import algs.astar as astar
 
@@ -84,9 +83,9 @@ assert is_valid_floor(["HM"])
 assert is_valid_floor(["E", "ROCM"])
 assert is_valid_floor(["E", "ROCG"])
 assert is_valid_floor(["E", "ROCM", "ROCG"])
-assert is_valid_floor(['HG', 'E', 'HM'])
-assert not is_valid_floor(['LM', 'HG', 'E', 'HM'])
-assert not is_valid_floor(['LM', 'HG', 'E'])
+assert is_valid_floor(["HG", "E", "HM"])
+assert not is_valid_floor(["LM", "HG", "E", "HM"])
+assert not is_valid_floor(["LM", "HG", "E"])
 assert not is_valid_floor(["ROCM", "ASDG"])
 assert not is_valid_floor(["E", "ROCM", "ASDG"])
 assert not is_valid_floor({"POLM", "THUM", "POLG"})
@@ -151,6 +150,7 @@ def solve(input: str):
     init = pic_to_state(input)
     path, stats = astar.astar_search(init, est_moves, gen_states)
     return len(path) - 1, stats
+
 
 def test_solve():
     pathlen, _ = solve(test_pic)
@@ -234,18 +234,19 @@ assert (
 
 def solve_fast(input: str):
     init = pic_to_state(input)
-    path, n, f = astar.astar_search(init, est_moves, gen_states_sym)
-    print("pathlen: ", len(path), "num explored: ", n, "frontier: ", f)
-    return len(path) - 1
+    path, stats = astar.astar_search(init, est_moves, gen_states_sym)
+    return len(path) - 1, stats
 
 
 def timeit(func):
     start = time.perf_counter()
-    func()
+    x = func()
     end = time.perf_counter()
     print("time: ", end - start)
+    print("func output: ", x)
 
 
+# timeit(lambda: solve(test_pic))
 # timeit(lambda: solve_fast(test_pic))
 # timeit(lambda: solve(real_pic)) # 7.5sec
 # timeit(lambda: solve_fast(real_pic)) # 8sec, doh!
