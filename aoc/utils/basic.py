@@ -13,3 +13,14 @@ def get_or_add(d: dict, key, value=None):
     else:
         d[key] = value
     return value
+
+
+def nth(iterable, n):
+    if n < 1:
+        raise ValueError("n < 1. This function is 1 indexed")
+    c = 0
+    for i in iterable:
+        c += 1
+        if c == n:
+            return i
+    return None
