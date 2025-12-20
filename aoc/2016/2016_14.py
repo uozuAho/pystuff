@@ -1,35 +1,31 @@
 import re
-from collections import deque
+from functools import lru_cache
 
 import utils.hash as hash
 
 
-def findkeys(salt: str, hasher):
-    cands = deque()
-    counter = 0
-    while True:
-        while len(cands) < 1002:
-            cands.append((counter, hasher(salt + str(counter))))
-            counter += 1
-        n, h = cands.popleft()
-        m = re.search(r"(.)\1\1", h)
+@lru_cache(maxsize=1010)
+def myhash(s: str, repeat: int = 1):
+    for _ in range(repeat):
+        s = hash.md5(s)
+    return s
+
+
+def findkeys2(salt: str, hasher):
+    for i in range(9999999999999999):
+        m = re.search(r"(.)\1\1", hasher(salt + str(i)))
         if m:
-            c = m.group(1)
-            cc = c * 5
-            for i in range(1, 1001):
-                nn, hh = cands[i]
-                if cc in hh:
-                    yield n, h
-                    break
+            c = m.group(1) * 5
+            if any(c in hasher(salt + str(x)) for x in range(i + 1, i + 1000)):
+                yield i
 
 
 def solve(input: str, nth: int, hasher):
     count = 0
-    for k in findkeys(input, hasher):
+    for i in findkeys2(input, hasher):
         count += 1
-        print(count, k)
         if count == nth:
-            return k
+            return i
 
 
 def stretch(s: str):
@@ -38,8 +34,8 @@ def stretch(s: str):
     return s
 
 
-# solve("abc", 64, hash.md5)
-# solve("jlmsuwbz", 64, hash.md5)
+assert solve("abc", 64, lambda s: myhash(s, 1)) == 22728
+assert solve("jlmsuwbz", 64, lambda s: myhash(s, 1)) == 35186
+assert solve("abc", 1, lambda s: myhash(s, 2017)) == 10
 
-# solve("abc", 64, stretch)
 # solve("jlmsuwbz", 64, stretch)
