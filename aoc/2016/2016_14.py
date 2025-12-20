@@ -28,8 +28,10 @@ def solve(input: str, n: int, hasher):
 assert solve("abc", 64, myhash) == 22728
 assert solve("jlmsuwbz", 64, myhash) == 35186
 
+
 def asdf(salt, i):
     return myhash(salt, i, 2017)
 
+
 # this may be broken, not sure
-assert solve("abc", 1, asdf) == 18 # was 10??
+assert solve("abc", 1, asdf) == 18  # was 10??
