@@ -15,6 +15,12 @@ def get_or_add(d: dict, key, value=None):
     return value
 
 
+def first(itr):
+    for x in itr:
+        return x
+    return None
+
+
 def nth(iterable, n):
     if n < 1:
         raise ValueError("n < 1. This function is 1 indexed")

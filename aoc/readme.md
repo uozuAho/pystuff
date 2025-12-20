@@ -1,5 +1,10 @@
 # My advent of code solutions
 
+Well, sort of mine. I look at a lot of other solutions to improve
+my python skillz. Lots of people on the leaderboards put up their
+solutions. A big inspiration is Peter Norvig's
+[pytudes](https://github.com/norvig/pytudes).
+
 # Quick start
 - install uv, make
 - clone repo
