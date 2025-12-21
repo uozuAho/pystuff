@@ -99,6 +99,22 @@ def turnright(facing: Dir):
     return facing * -1j
 
 
+def up(pos: PosXy, invert_y=False):
+    return pos[0], pos[1] + (1 if invert_y else -1)
+
+
+def down(pos: PosXy, invert_y=False):
+    return pos[0], pos[1] + (-1 if invert_y else 1)
+
+
+def left(pos: PosXy):
+    return pos[0] - 1, pos[1]
+
+
+def right(pos: PosXy):
+    return pos[0] + 1, pos[1]
+
+
 def add(pos: PosXy, dir: Dir, num: int) -> PosXy:
     x = pos[0] + int(dir.real) * num
     y = pos[1] + int(dir.imag) * num
