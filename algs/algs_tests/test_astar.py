@@ -8,6 +8,6 @@ def test_astar():
     def gennext(state: int):
         return state - 1, state + 1
 
-    path = astar.astar_search(0, h, gennext)
+    path, _ = astar.astar_search(0, h, gennext)
 
     assert path == list(range(11))
