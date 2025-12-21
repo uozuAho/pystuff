@@ -38,7 +38,7 @@ def astar_search(start, h_func, moves_func):
         if h_func(s) == 0:
             return path(previous, s), {
                 "num_explored": num_explored,
-                "len(frontier)": len(frontier)
+                "len(frontier)": len(frontier),
             }
         for ns in moves_func(s):
             new_cost = path_cost[s] + 1
@@ -48,7 +48,4 @@ def astar_search(start, h_func, moves_func):
                 heapq.heappush(frontier, (new_cost + h_func(ns), ns))
                 path_cost[ns] = new_cost
                 previous[ns] = s
-    return None, {
-                "num_explored": num_explored,
-                "len(frontier)": len(frontier)
-            }
+    return None, {"num_explored": num_explored, "len(frontier)": len(frontier)}

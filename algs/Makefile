@@ -11,6 +11,8 @@ test:
 
 precommit: format lint test
 
+pc: precommit
+
 bench:
 	uv run pytest --benchmark-only --benchmark-sort Name
 
