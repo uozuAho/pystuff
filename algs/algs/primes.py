@@ -1,5 +1,28 @@
 from dataclasses import dataclass
 import functools
+import math
+
+
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, n // 2 + 1):
+        if n % i == 0:
+            return False
+    return True
+
+
+def primes(nmax: int):
+    """primes up to but not including nmax,
+    using https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes"""
+    _p = [True] * nmax
+    for i in range(2, math.ceil(math.sqrt(nmax)) + 1):
+        if _p[i]:
+            for j in range(i * i, nmax, i):
+                _p[j] = False
+    for i in range(2, nmax):
+        if _p[i]:
+            yield i
 
 
 @dataclass

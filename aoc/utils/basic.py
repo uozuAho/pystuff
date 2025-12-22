@@ -1,4 +1,6 @@
+import operator
 import typing as t
+from functools import reduce
 
 type Pred = t.Callable[[t.Any], bool]
 
@@ -30,3 +32,7 @@ def nth(iterable, n):
         if c == n:
             return i
     return None
+
+
+def product(itr):
+    return reduce(operator.mul, itr, 1)
