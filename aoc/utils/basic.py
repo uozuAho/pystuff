@@ -1,6 +1,7 @@
 import operator
 import typing as t
 from functools import reduce
+import time
 
 type Pred = t.Callable[[t.Any], bool]
 
@@ -36,3 +37,10 @@ def nth(iterable, n):
 
 def product(itr):
     return reduce(operator.mul, itr, 1)
+
+
+def timeit(func):
+    start = time.perf_counter()
+    result = func()
+    end = time.perf_counter()
+    print(f"Runtime: {end - start}. Result: {result}")
