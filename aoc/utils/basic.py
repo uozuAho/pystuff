@@ -35,10 +35,6 @@ def nth(iterable, n):
     return None
 
 
-def product(itr):
-    return reduce(operator.mul, itr, 1)
-
-
 def timeit(func):
     start = time.perf_counter()
     result = func()
