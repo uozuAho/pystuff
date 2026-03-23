@@ -1,6 +1,6 @@
 import pytest
 
-from utils.maths import product, divisors, proper_divisors
+from utils.maths import product, divisors, proper_divisors, fibonacci
 
 
 def test_product():
@@ -16,3 +16,13 @@ def test_product():
 )
 def test_divisors(n, expected):
     assert tuple(sorted(divisors(n))) == expected
+
+
+@pytest.mark.parametrize(
+    "n, expected",
+    [
+        (1, 1), (2, 1), (3, 2), (4, 3), (5, 5), (6, 8), (7, 13)
+    ]
+)
+def test_fibonacci(n, expected):
+    assert fibonacci(n) == expected
