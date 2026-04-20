@@ -6,7 +6,7 @@ V = TypeVar("V")
 
 @dataclass
 class _Node(Generic[V]):
-    c: str
+    char: str
     left: "_Node[V] | None" = None
     mid: "_Node[V] | None" = None
     right: "_Node[V] | None" = None
@@ -19,11 +19,11 @@ class Tst(Generic[V]):
     """
 
     def __init__(self):
-        self._n: int = 0
+        self._size: int = 0
         self._root: _Node[V] | None = None
 
     def size(self) -> int:
-        return self._n
+        return self._size
 
     def contains(self, key: str) -> bool:
         if key is None:
@@ -43,10 +43,10 @@ class Tst(Generic[V]):
     def _get(self, x: "_Node[V] | None", key: str, d: int) -> "_Node[V] | None":
         if x is None:
             return None
-        c = key[d]
-        if c < x.c:
+        char = key[d]
+        if char < x.char:
             return self._get(x.left, key, d)
-        elif c > x.c:
+        elif char > x.char:
             return self._get(x.right, key, d)
         elif d < len(key) - 1:
             return self._get(x.mid, key, d + 1)
@@ -57,9 +57,9 @@ class Tst(Generic[V]):
         if key is None:
             raise ValueError("calls put() with null key")
         if not self.contains(key):
-            self._n += 1
+            self._size += 1
         elif val is None:
-            self._n -= 1
+            self._size -= 1
         self._root = self._put(self._root, key, val, 0)
 
     def _put(
@@ -67,10 +67,10 @@ class Tst(Generic[V]):
     ) -> "_Node[V]":
         c = key[d]
         if x is None:
-            x = _Node(c=c)
-        if c < x.c:
+            x = _Node(char=c)
+        if c < x.char:
             x.left = self._put(x.left, key, val, d)
-        elif c > x.c:
+        elif c > x.char:
             x.right = self._put(x.right, key, val, d)
         elif d < len(key) - 1:
             x.mid = self._put(x.mid, key, val, d + 1)
@@ -88,9 +88,9 @@ class Tst(Generic[V]):
         i = 0
         while x is not None and i < len(query):
             c = query[i]
-            if c < x.c:
+            if c < x.char:
                 x = x.left
-            elif c > x.c:
+            elif c > x.char:
                 x = x.right
             else:
                 i += 1
@@ -128,8 +128,8 @@ class Tst(Generic[V]):
             return
         self._collect(x.left, prefix, queue)
         if x.val is not None:
-            queue.append("".join(prefix) + x.c)
-        self._collect(x.mid, prefix + [x.c], queue)
+            queue.append("".join(prefix) + x.char)
+        self._collect(x.mid, prefix + [x.char], queue)
         self._collect(x.right, prefix, queue)
 
     def _collect_pattern(
@@ -143,12 +143,12 @@ class Tst(Generic[V]):
         if x is None:
             return
         c = pattern[i]
-        if c == "." or c < x.c:
+        if c == "." or c < x.char:
             self._collect_pattern(x.left, prefix, i, pattern, queue)
-        if c == "." or c == x.c:
+        if c == "." or c == x.char:
             if i == len(pattern) - 1 and x.val is not None:
-                queue.append("".join(prefix) + x.c)
+                queue.append("".join(prefix) + x.char)
             if i < len(pattern) - 1:
-                self._collect_pattern(x.mid, prefix + [x.c], i + 1, pattern, queue)
-        if c == "." or c > x.c:
+                self._collect_pattern(x.mid, prefix + [x.char], i + 1, pattern, queue)
+        if c == "." or c > x.char:
             self._collect_pattern(x.right, prefix, i, pattern, queue)
